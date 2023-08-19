@@ -9,6 +9,10 @@
     "lint": "next lint",
     "format": "prettier . --write"
   },
+  "volta": {
+    "node": "18.17.0",
+    "pnpm": "8.6.11"
+  },
   "dependencies": {
     "@types/node": "20.5.1",
     "@types/react": "18.2.20",
