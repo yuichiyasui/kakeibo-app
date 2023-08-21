@@ -34,3 +34,6 @@ next-env.d.ts
 
 # docker
 data
+
+# panda-css
+.styled-system

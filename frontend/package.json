@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "rm -rf .next && next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier . --write"
+    "format": "prettier . --write",
+    "prepare": "panda codegen"
   },
   "volta": {
     "node": "18.17.0",
@@ -25,6 +26,7 @@
     "typescript": "5.1.6"
   },
   "devDependencies": {
+    "@pandacss/dev": "^0.11.1",
     "prettier": "3.0.2"
   }
 }
