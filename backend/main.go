@@ -1,13 +1,24 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"backend/controller"
+	"backend/infrastructure"
+
+	"github.com/gin-gonic/gin"
+)
 
 func main() {
-	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
+	infrastructure.NewDB()
+
+	router := gin.Default()
+	router.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "pong",
 		})
 	})
-	r.Run(":8080")
+
+	v1 := router.Group("/v1")
+	controller.AddTransactionsRoutes(v1)
+
+	router.Run(":8080")
 }
