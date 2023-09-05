@@ -1,15 +1,18 @@
 package service
 
 import (
+	"backend/infrastructure"
+	"backend/infrastructure/entity"
 	"backend/model"
-	"fmt"
-	"strconv"
+	"time"
+
+	"github.com/google/uuid"
 )
 
-func AddTransaction(params *model.Transaction) {
-	fmt.Println("ユーザーID:" + params.UserId)
-	fmt.Println("種類:" + params.Type)
-	fmt.Println("金額:" + strconv.Itoa(params.Amount))
-	fmt.Println("利用日:" + params.Date)
-	fmt.Println("メモ:" + params.Memo)
+func AddTransaction(params *model.Transaction) error {
+	uuidObj, _ := uuid.NewUUID()
+	dto := &entity.Transaction{Id: uuidObj.String(), UserId: params.UserId, Type: params.Type, Amount: params.Amount, TransactionDate: params.Date, Memo: params.Memo, CreatedAt: time.Now(), UpdatedAt: time.Now()}
+	table := infrastructure.Db.Table("Transactions")
+	err := table.Put(dto).Run()
+	return err
 }

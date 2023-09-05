@@ -3,6 +3,7 @@ package controller
 import (
 	"backend/model"
 	"backend/service"
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -14,8 +15,12 @@ func addTransaction(c *gin.Context) {
 	if err != nil {
 		c.String(http.StatusBadRequest, "Bad Request")
 	}
-	service.AddTransaction(&t)
-	c.JSON(http.StatusOK, t)
+	err = service.AddTransaction(&t)
+	if err != nil {
+		fmt.Println(err)
+		c.String(http.StatusInternalServerError, "Server Error")
+	}
+	c.String(http.StatusOK, "OK")
 }
 
 func AddTransactionsRoutes(rg *gin.RouterGroup) {
